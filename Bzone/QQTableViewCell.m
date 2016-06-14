@@ -35,7 +35,6 @@
     if(self)
     {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-//        self.contentView.backgroundColor = [UIColor lightGrayColor];
         self.icon = [[UIImageView alloc]init];
         [self.contentView addSubview:_icon];
         self.userName = [[UILabel alloc]init];
@@ -65,6 +64,9 @@
         self.textF = [[UITextField alloc]init];
         _textF.backgroundColor = [UIColor darkGrayColor];
         [self.contentView addSubview:_textF];
+        
+        self.content.preferredMaxLayoutWidth = [UIScreen mainScreen].bounds.size.width-30;
+
     }
     return self;
 }
@@ -73,10 +75,27 @@
 {
     [super layoutSubviews];
     
-    self.content.preferredMaxLayoutWidth = self.contentView.frame.size.width - 10;
+    
     
 }
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if(self)
+    {
+        self.content.preferredMaxLayoutWidth = [UIScreen mainScreen].bounds.size.width-30;
+    }
+    return self;
+}
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if(self)
+    {
 
+    }
+    return self;
+}
 - (void)setQqData:(QQDataModel *)qqData
 {
     _qqData = qqData;
@@ -145,7 +164,6 @@
             make.height.mas_equalTo(0);
         }];
     }
-    
     if(qqData.ismoreImages)
     {
         self.moreImages.hidden = NO;
@@ -230,5 +248,6 @@
     [self layoutIfNeeded];
     
     qqData.cellHeight = CGRectGetMaxY(self.textF.frame)+margin;
+    
 }
 @end

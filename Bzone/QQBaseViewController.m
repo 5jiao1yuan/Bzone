@@ -59,7 +59,7 @@ static NSString *cellID = @"cell";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     QQDataModel *qqM = self.dataSource[indexPath.row];
-    
+    NSLog(@"%d==>%f", indexPath.row, qqM.cellHeight);
     return qqM.cellHeight;
 }
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
