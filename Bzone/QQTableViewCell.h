@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class QQDataModel;
 @interface QQTableViewCell : UITableViewCell
+
+@property (nonatomic, strong)QQDataModel *qqData;
 
 @end

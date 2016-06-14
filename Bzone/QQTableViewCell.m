@@ -8,6 +8,7 @@
 
 #import "QQTableViewCell.h"
 #import <Masonry.h>
+#import "QQDataModel.h"
 
 @interface QQTableViewCell ()
 
@@ -34,32 +35,23 @@
     if(self)
     {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.contentView.backgroundColor = [UIColor lightGrayColor];
+//        self.contentView.backgroundColor = [UIColor lightGrayColor];
         self.icon = [[UIImageView alloc]init];
-        self.icon.backgroundColor = [UIColor redColor];
         [self.contentView addSubview:_icon];
         self.userName = [[UILabel alloc]init];
-        _userName.text = @"大坏蛋是小鸡";
         [self.contentView addSubview:_userName];
         self.vip = [[UIImageView alloc]init];
-        self.vip.backgroundColor = [UIColor blueColor];
         [self.contentView addSubview:_vip];
         self.sendTime = [[UILabel alloc]init];
-        _sendTime.backgroundColor = [UIColor yellowColor];
         [self.contentView addSubview:_sendTime];
         self.more = [[UIButton alloc]init];
-        _more.backgroundColor = [UIColor grayColor];
         [self.contentView addSubview:_more];
         self.content = [[UILabel alloc]init];
         _content.numberOfLines = 0;
-        _content.backgroundColor = [UIColor lightTextColor];
-        _content.text = @"大坏蛋是小鸡坏蛋是小鸡大坏蛋是小鸡大坏蛋是小鸡大坏蛋是小鸡大坏蛋是小鸡大是小鸡小鸡大坏蛋是小鸡大坏蛋是小鸡";
         [self.contentView addSubview:_content];
         self.moreImages = [[UIView alloc]init];
         [self.contentView addSubview:_moreImages];
         self.device = [[UILabel alloc]init];
-        _device.text = @"来自于iphone5s";
-        _device.backgroundColor = [UIColor groupTableViewBackgroundColor];
         [self.contentView addSubview:_device];
         self.appendV = [[UIView alloc]init];
         self.appendV.backgroundColor = [UIColor darkGrayColor];
@@ -80,17 +72,29 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    
+    self.content.preferredMaxLayoutWidth = self.contentView.frame.size.width - 10;
+    
+}
+
+- (void)setQqData:(QQDataModel *)qqData
+{
+    _qqData = qqData;
     CGFloat margin = 5;
     [self.icon mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_offset(margin);
         make.top.mas_offset(margin);
         make.width.height.mas_equalTo(40);
     }];
+    self.icon.image = [UIImage imageNamed:qqData.icon];
+    
     [self.more mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-margin);
         make.top.mas_equalTo(self.icon.mas_top);
         make.width.height.mas_equalTo(20);
     }];
+    [self.more setBackgroundImage:[UIImage imageNamed:@"more.png"] forState:UIControlStateNormal];
+    
     [self.userName mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.icon.mas_top);
         make.left.mas_equalTo(self.icon.mas_right).mas_offset(margin);
@@ -98,11 +102,21 @@
         make.width.mas_greaterThanOrEqualTo(20);
         make.width.mas_lessThanOrEqualTo(200);
     }];
-    [self.vip mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.userName.mas_right).mas_offset(margin);
-        make.top.mas_equalTo(self.icon.mas_top);
-        make.width.height.mas_equalTo(15);
-    }];
+    self.userName.text = qqData.userName;
+    
+    if(qqData.vip)
+    {   self.vip.hidden = NO;
+        [self.vip mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.userName.mas_right).mas_offset(margin);
+            make.top.mas_equalTo(self.icon.mas_top);
+            make.width.height.mas_equalTo(15);
+        }];
+        self.vip.image = [UIImage imageNamed:@"vip.png"];
+    }else
+    {
+        self.vip.hidden = YES;
+    }
+    
     [self.sendTime mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.icon.mas_right).mas_offset(margin);
         make.top.mas_equalTo(self.userName.mas_bottom).mas_offset(margin/2);
@@ -110,23 +124,54 @@
         make.width.mas_greaterThanOrEqualTo(20);
         make.width.mas_lessThanOrEqualTo(140);
     }];
+    self.sendTime.text = qqData.sendTime;
     
-    [self.content mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.icon.mas_bottom).mas_offset(margin*2);
-        make.left.mas_equalTo(self.icon.mas_left);
-        make.right.mas_equalTo(self.more.mas_right);
-    }];
-    [self.moreImages mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.content.mas_bottom).mas_offset(margin);
-        make.left.mas_equalTo(self.icon.mas_left);
-        make.right.mas_equalTo(self.more.mas_right);
-    }];
+    if(qqData.isContent)
+    {
+        self.content.hidden = NO;
+        [self.content mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.icon.mas_bottom).mas_offset(margin*2);
+            make.left.mas_equalTo(self.icon.mas_left);
+            make.right.mas_equalTo(self.more.mas_right);
+        }];
+        self.content.text = qqData.content;
+    }else
+    {
+        self.content.hidden = YES;
+        [self.content mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.icon.mas_bottom);
+            make.left.mas_equalTo(self.icon.mas_left);
+            make.right.mas_equalTo(self.more.mas_right);
+            make.height.mas_equalTo(0);
+        }];
+    }
+    
+    if(qqData.ismoreImages)
+    {
+        self.moreImages.hidden = NO;
+        [self.moreImages mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.content.mas_bottom).mas_offset(margin);
+            make.left.mas_equalTo(self.icon.mas_left);
+            make.right.mas_equalTo(self.more.mas_right);
+        }];
+    }
+    else
+    {
+        self.moreImages.hidden = YES;
+        [self.moreImages mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.content.mas_bottom).mas_offset(0);
+            make.left.mas_equalTo(self.icon.mas_left);
+            make.right.mas_equalTo(self.more.mas_right);
+            make.height.mas_equalTo(0);
+        }];
+    }
     [self.device mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.moreImages.mas_bottom).mas_offset(margin);
         make.left.mas_equalTo(self.icon.mas_left);
         make.right.mas_equalTo(-200);
         make.height.mas_equalTo(24);
     }];
+    self.device.text = qqData.device;
     
     [self.appendV mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.device.mas_bottom).mas_offset(margin);
@@ -134,19 +179,46 @@
         make.right.mas_equalTo(self.more.mas_right);
         make.height.mas_equalTo(44);
     }];
-    
-    [self.showZan mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.appendV.mas_bottom).mas_offset(margin);
-        make.left.mas_equalTo(self.icon.mas_left);
-        make.right.mas_equalTo(self.more.mas_right);
-        make.height.mas_equalTo(44);
-    }];
-    [self.commentV mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.showZan.mas_bottom).mas_offset(margin);
-        make.left.mas_equalTo(self.icon.mas_left);
-        make.right.mas_equalTo(self.more.mas_right);
+    if(qqData.isShowZan)
+    {
+        self.showZan.hidden = NO;
+        [self.showZan mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.appendV.mas_bottom).mas_offset(margin);
+            make.left.mas_equalTo(self.icon.mas_left);
+            make.right.mas_equalTo(self.more.mas_right);
+            make.height.mas_equalTo(44);
+        }];
+        self.showZan.text = qqData.showZan;
+    }else
+    {
+        self.showZan.hidden = YES;
+        [self.showZan mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.appendV.mas_bottom).mas_offset(0);
+            make.left.mas_equalTo(self.icon.mas_left);
+            make.right.mas_equalTo(self.more.mas_right);
+            make.height.mas_equalTo(0);
+        }];
+    }
+    if(qqData.isCommentV)
+    {
+        self.commentV.hidden = NO;
+        [self.commentV mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.showZan.mas_bottom).mas_offset(margin);
+            make.left.mas_equalTo(self.icon.mas_left);
+            make.right.mas_equalTo(self.more.mas_right);
+        }];
         
-    }];
+    }else
+    {
+        self.commentV.hidden = YES;
+        [self.commentV mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.showZan.mas_bottom).mas_offset(0);
+            make.left.mas_equalTo(self.icon.mas_left);
+            make.right.mas_equalTo(self.more.mas_right);
+            make.height.mas_equalTo(0);
+        }];
+    }
+   
     
     [self.textF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.commentV.mas_bottom).mas_offset(margin);
@@ -155,7 +227,8 @@
         make.height.mas_equalTo(30);
     }];
     
+    [self layoutIfNeeded];
     
-    
+    qqData.cellHeight = CGRectGetMaxY(self.textF.frame)+margin;
 }
 @end
