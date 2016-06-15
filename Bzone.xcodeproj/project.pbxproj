@@ -19,6 +19,10 @@
 		5A173B8D1D0FA07E00B33E1B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A173B8C1D0FA07E00B33E1B /* AppDelegate.m */; };
 		5A900E181D0FB4E500546925 /* QQDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A900E171D0FB4E500546925 /* QQDataModel.m */; };
 		5A900E1A1D0FB77700546925 /* datas.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5A900E191D0FB77700546925 /* datas.plist */; };
+		5A93D40D1D10F36900AE8065 /* PHotoSHowV.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A93D40C1D10F36900AE8065 /* PHotoSHowV.m */; };
+		5A93D4111D110EFA00AE8065 /* ShowDetialPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A93D40F1D110EFA00AE8065 /* ShowDetialPhotoViewController.m */; };
+		5A93D4121D110EFA00AE8065 /* ShowDetialPhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A93D4101D110EFA00AE8065 /* ShowDetialPhotoViewController.xib */; };
+		5A93D4151D11126200AE8065 /* UIView+FindVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A93D4141D11126200AE8065 /* UIView+FindVc.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +65,13 @@
 		5A900E161D0FB4E500546925 /* QQDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QQDataModel.h; sourceTree = "<group>"; };
 		5A900E171D0FB4E500546925 /* QQDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QQDataModel.m; sourceTree = "<group>"; };
 		5A900E191D0FB77700546925 /* datas.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = datas.plist; sourceTree = "<group>"; };
+		5A93D40B1D10F36900AE8065 /* PHotoSHowV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PHotoSHowV.h; sourceTree = "<group>"; };
+		5A93D40C1D10F36900AE8065 /* PHotoSHowV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PHotoSHowV.m; sourceTree = "<group>"; };
+		5A93D40E1D110EFA00AE8065 /* ShowDetialPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowDetialPhotoViewController.h; sourceTree = "<group>"; };
+		5A93D40F1D110EFA00AE8065 /* ShowDetialPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowDetialPhotoViewController.m; sourceTree = "<group>"; };
+		5A93D4101D110EFA00AE8065 /* ShowDetialPhotoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowDetialPhotoViewController.xib; sourceTree = "<group>"; };
+		5A93D4131D11126200AE8065 /* UIView+FindVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FindVc.h"; sourceTree = "<group>"; };
+		5A93D4141D11126200AE8065 /* UIView+FindVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FindVc.m"; sourceTree = "<group>"; };
 		ADE6FC5DAFCA0F4EA3CF1DE4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		CA74FB2EE4B44B2279508EFE /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -124,6 +135,13 @@
 				5A173B891D0FA05900B33E1B /* QQTableViewCell.m */,
 				5A900E161D0FB4E500546925 /* QQDataModel.h */,
 				5A900E171D0FB4E500546925 /* QQDataModel.m */,
+				5A93D40B1D10F36900AE8065 /* PHotoSHowV.h */,
+				5A93D40C1D10F36900AE8065 /* PHotoSHowV.m */,
+				5A93D40E1D110EFA00AE8065 /* ShowDetialPhotoViewController.h */,
+				5A93D40F1D110EFA00AE8065 /* ShowDetialPhotoViewController.m */,
+				5A93D4101D110EFA00AE8065 /* ShowDetialPhotoViewController.xib */,
+				5A93D4131D11126200AE8065 /* UIView+FindVc.h */,
+				5A93D4141D11126200AE8065 /* UIView+FindVc.m */,
 				5A173B5C1D0FA02C00B33E1B /* Main.storyboard */,
 				5A173B5F1D0FA02C00B33E1B /* Assets.xcassets */,
 				5A173B611D0FA02C00B33E1B /* LaunchScreen.storyboard */,
@@ -287,6 +305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A173B631D0FA02C00B33E1B /* LaunchScreen.storyboard in Resources */,
+				5A93D4121D110EFA00AE8065 /* ShowDetialPhotoViewController.xib in Resources */,
 				5A173B601D0FA02C00B33E1B /* Assets.xcassets in Resources */,
 				5A900E1A1D0FB77700546925 /* datas.plist in Resources */,
 				5A173B5E1D0FA02C00B33E1B /* Main.storyboard in Resources */,
@@ -362,8 +381,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A93D4151D11126200AE8065 /* UIView+FindVc.m in Sources */,
+				5A93D4111D110EFA00AE8065 /* ShowDetialPhotoViewController.m in Sources */,
 				5A173B8D1D0FA07E00B33E1B /* AppDelegate.m in Sources */,
 				5A173B8B1D0FA05900B33E1B /* QQTableViewCell.m in Sources */,
+				5A93D40D1D10F36900AE8065 /* PHotoSHowV.m in Sources */,
 				5A173B551D0FA02C00B33E1B /* main.m in Sources */,
 				5A173B8A1D0FA05900B33E1B /* QQBaseViewController.m in Sources */,
 				5A900E181D0FB4E500546925 /* QQDataModel.m in Sources */,

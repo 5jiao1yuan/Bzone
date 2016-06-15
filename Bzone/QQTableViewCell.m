@@ -9,6 +9,7 @@
 #import "QQTableViewCell.h"
 #import <Masonry.h>
 #import "QQDataModel.h"
+#import "PHotoSHowV.h"
 
 @interface QQTableViewCell ()
 
@@ -18,7 +19,7 @@
 @property (nonatomic, strong) UILabel *sendTime;
 @property (nonatomic, strong) UIButton *more;
 @property (nonatomic, strong) UILabel *content;
-@property (nonatomic, strong) UIView *moreImages;
+@property (nonatomic, strong) PHotoSHowV *moreImages;
 @property (nonatomic, strong) UILabel *device;
 @property (nonatomic, strong) UIView *appendV;
 @property (nonatomic, strong) UILabel *showZan;
@@ -48,8 +49,7 @@
         self.content = [[UILabel alloc]init];
         _content.numberOfLines = 0;
         [self.contentView addSubview:_content];
-        self.moreImages = [[UIView alloc]init];
-        [self.contentView addSubview:_moreImages];
+       
         self.device = [[UILabel alloc]init];
         [self.contentView addSubview:_device];
         self.appendV = [[UIView alloc]init];
@@ -164,15 +164,24 @@
             make.height.mas_equalTo(0);
         }];
     }
+    if(_moreImages != nil)
+    {
+        [self.moreImages removeFromSuperview];
+    }
+    self.moreImages = [[PHotoSHowV alloc]init];
+    [self.contentView addSubview:_moreImages];
     if(qqData.ismoreImages)
     {
         self.moreImages.hidden = NO;
-        [self.moreImages mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.content.mas_bottom).mas_offset(margin);
-            make.left.mas_equalTo(self.icon.mas_left);
-            make.right.mas_equalTo(self.more.mas_right);
+        [self.moreImages initPhotos:qqData.moreImages bolok:^(CGFloat viewHeight) {
+            [self.moreImages mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(self.content.mas_bottom).mas_offset(margin);
+                make.left.mas_equalTo(self.icon.mas_left);
+                make.right.mas_equalTo(self.more.mas_right);
+                make.height.mas_equalTo(viewHeight);
+            }];
         }];
-    }
+     }
     else
     {
         self.moreImages.hidden = YES;

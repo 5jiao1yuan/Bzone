@@ -16,7 +16,7 @@
 		<key>isContent</key>
 		<true/>
 		<key>moreImages</key>
-		<string>icon.png/more.png/vip.png</string>
+		<string>icon.png/more.png/vip.png/icon.png/more.png/vip.png/more.png/vip.png</string>
 		<key>ismoreImages</key>
 		<true/>
 		<key>device</key>
@@ -76,7 +76,7 @@
 		<key>isContent</key>
 		<true/>
 		<key>moreImages</key>
-		<string>icon.png/more.png/vip.png</string>
+		<string>icon.png/more.png/vip.png/vip.png</string>
 		<key>ismoreImages</key>
 		<true/>
 		<key>device</key>
